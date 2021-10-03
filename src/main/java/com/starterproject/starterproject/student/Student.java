@@ -1,5 +1,7 @@
 package com.starterproject.starterproject.student;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.Period;
@@ -18,8 +20,13 @@ public class Student {
             generator = "student_sequence"
     )
     private Long id;
-    private String name;
+    @Column(nullable = false)
+    private String firstName;
+    @Column(nullable = false)
+    private String lastName;
+    @Column(nullable = false, unique = true)
     private String email;
+    @Column(nullable = false)
     private LocalDate dayOfBirth;
 
     @Transient
@@ -28,16 +35,16 @@ public class Student {
     public Student() {
     }
 
-    public Student(Long id, String name, String email, LocalDate dayOfBirth) {
+    public Student(Long id, String firstName, String email, LocalDate dayOfBirth) {
         this.id = id;
-        this.name = name;
-        this.email = email;
+        this.firstName = firstName;
+        this.email = email.toLowerCase();
         this.dayOfBirth = dayOfBirth;
     }
 
-    public Student(String name, String email, LocalDate dayOfBirth) {
-        this.name = name;
-        this.email = email;
+    public Student(String firstName, String email, LocalDate dayOfBirth) {
+        this.firstName = firstName;
+        this.email = email.toLowerCase();
         this.dayOfBirth = dayOfBirth;
     }
 
@@ -45,16 +52,25 @@ public class Student {
         return id;
     }
 
+    @JsonIgnore
     public void setId(Long id) {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setFirstName(String name) {
+        this.firstName = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -62,7 +78,7 @@ public class Student {
     }
 
     public void setEmail(String email) {
-        this.email = email;
+        this.email = email.toLowerCase();
     }
 
     public LocalDate getDayOfBirth() {
@@ -83,12 +99,6 @@ public class Student {
 
     @Override
     public String toString() {
-        return "Student{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", email='" + email + '\'' +
-                ", dayOfBirth=" + dayOfBirth +
-                ", age=" + age +
-                '}';
+        return firstName + " " + lastName + " " + email + " " + dayOfBirth + " " + age;
     }
 }

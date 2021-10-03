@@ -11,20 +11,25 @@ import java.util.List;
 @Configuration
 public class StudentConfig {
 
-    @Bean
-    CommandLineRunner commandLineRunner(StudentRepository repository) {
-        return args -> {
-            Student hans = new Student(
-                    "Hans",
-                    "hans@web.de",
-                    LocalDate.of(2000, Month.AUGUST, 14));
-
-            Student hanna = new Student(
-                    "Hanna",
-                    "Hanna@web.de",
-                    LocalDate.of(2001, Month.APRIL, 15));
-
-            repository.saveAll(List.of(hans, hanna));
-        };
-    }
+//    @Bean
+//    CommandLineRunner commandLineRunner(StudentRepository repository) {
+//        return args -> {
+//            Student hans = new Student(
+//                    "Hans",
+//                    "hans@web.de",
+//                    LocalDate.of(2000, Month.AUGUST, 14));
+//
+//            Student hanna = new Student(
+//                    "Hanna",
+//                    "hanna@web.de",
+//                    LocalDate.of(2001, Month.APRIL, 15));
+//
+//            Student paul = new Student(
+//                    "Paul",
+//                    "paul@gmx.de",
+//                    LocalDate.of(2004, Month.AUGUST, 4));
+//
+//            repository.saveAll(List.of(paul, hans, hanna));
+//        };
+//    }
 }

@@ -7,6 +7,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/student")
+//@ControllerAdvice
 public class StudentController {
 
     private final StudentService studentService;
@@ -22,8 +23,17 @@ public class StudentController {
     }
 
     @PostMapping
-    public void registerNewStudent(@RequestBody Student student)
-    {
-        studentService.addNewStudent(student);
+    public void registerNewStudent(@RequestBody Student student) {
+        studentService.saveStudent(student);
+    }
+
+    @DeleteMapping(path = "{studentId}")
+    public void deleteStudent(@PathVariable("studentId") Long id) {
+        studentService.deleteStudent(id);
+    }
+
+    @PutMapping
+    public void updateStudent(@RequestBody Student alteredStudent) {
+        studentService.updateStudent(alteredStudent);
     }
 }
