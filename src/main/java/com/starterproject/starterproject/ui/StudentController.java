@@ -5,17 +5,14 @@ import com.starterproject.starterproject.student.StudentService;
 import com.vaadin.flow.component.notification.Notification;
 import com.vaadin.flow.data.binder.Binder;
 import com.vaadin.flow.data.validator.EmailValidator;
-import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
-@Route("")
-public class StudentMainController extends StudentMainView {
+public class StudentController extends StudentView {
 
     private final StudentService studentService;
     Binder<Student> binder = new Binder<>();
 
-    @Autowired
-    public StudentMainController(StudentService studentService) {
+    public StudentController(StudentService studentService) {
 
         this.studentService = studentService;
         initBinder();
@@ -27,15 +24,15 @@ public class StudentMainController extends StudentMainView {
 //        studentList.setItems(studentService.getStudents());
 //        studentList.addValueChangeListener(e -> binder.setBean(e.getValue()));
 
-        studentGrid.setItems(studentService.getStudents());
-        studentGrid.addSelectionListener(e -> binder.setBean(e.getFirstSelectedItem().orElseGet(Student::new)));
+        userGrid.setItems(studentService.getStudents());
+        userGrid.addSelectionListener(e -> binder.setBean(e.getFirstSelectedItem().orElseGet(Student::new)));
 
     }
 
     private void clear() {
         binder.setBean(new Student());
-        studentGrid.deselectAll();
-        studentGrid.setItems(studentService.getStudents());
+        userGrid.deselectAll();
+        userGrid.setItems(studentService.getStudents());
     }
 
     public void saveStudent(Student student) {
